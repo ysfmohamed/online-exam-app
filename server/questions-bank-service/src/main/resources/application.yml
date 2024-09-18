@@ -1,0 +1,35 @@
+# Some configurations that are responsible for connecting to "online-exam-db" in MongoDB.
+#spring.data.mongodb.host=localhost
+#spring.data.mongodb.port=27017
+#spring.data.mongodb.database=online-exam-db
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: online-exam-db
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/principal
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+endpoint:
+  question-controller:
+    fetch-questions: /
+    fetch-questions-count: count
+    fetch-question: question/{id}
+    create-question: create
+    update-question: update/{id}
+    delete-question: delete/{id}
+    add-answer-to-question: add-answer-to-question/{id}
+    delete-answer-from-question: delete-answer-from-question/{questionId}/{answerId}
+
+roles:
+  teacher-role: teacher
+  student-role: student
+
+server:
+  port: 8081

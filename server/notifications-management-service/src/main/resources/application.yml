@@ -1,0 +1,29 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: online-exam-notification-db
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      spring:
+        json:
+          add:
+            type:
+              headers: false
+    consumer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      spring:
+        json:
+          use:
+            type:
+              headers: false
+
+server:
+  port:
+    8084

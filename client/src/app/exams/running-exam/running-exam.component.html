@@ -1,0 +1,76 @@
+<div
+  class="d-flex justify-content-center align-items-center running-exam"
+  *ngIf="!isStartExamPressed; else showExamQuestions"
+>
+  <div *ngIf="isExamLoading; else examIsLoaded">
+    <app-spinner></app-spinner>
+  </div>
+  <ng-template #examIsLoaded>
+    <button
+      class="btn btn-primary btn-start-exam"
+      type="button"
+      (click)="onStartExam()"
+    >
+      Start Exam
+    </button>
+  </ng-template>
+</div>
+<ng-template #showExamQuestions>
+  <div
+    class="d-flex justify-content-center align-items-center"
+    *ngIf="!isQuestionLoaded"
+  >
+    <app-spinner></app-spinner>
+  </div>
+  <div *ngIf="isQuestionLoaded">
+    <form [formGroup]="answerForm" (ngSubmit)="onSubmit()">
+      <div class="question-content mb-4">
+        {{ questionToBeDisplayed.content }}
+        <span class="d-block" *ngIf="correctAnswersNum > 1">
+          note: choose all correct answers
+        </span>
+        <span class="d-block" *ngIf="correctAnswersNum === 1">
+          note: choose only one answer
+        </span>
+      </div>
+      <div class="answers-list mb-4">
+        <ul class="list-group" formArrayName="answers">
+          <li
+            class="list-group-item answer"
+            *ngFor="let answer of getAnswers(); let i = index"
+            [formGroupName]="i"
+          >
+            <span class="me-2 answer-id">{{ i + 1 + "." }}</span>
+            <input
+              class="form-check-input me-2"
+              type="checkbox"
+              name="{{ correctAnswersNum === 1 ? 'listGroupRadio' : '' }}"
+              id="{{ questionAnswers[i].content }}"
+              formControlName="isAnswerChoosen"
+            />
+            <label
+              class="form-check-label answer-content"
+              attr.for="{{ questionAnswers[i].content }}"
+            >
+              {{ questionAnswers[i].content }}
+            </label>
+          </li>
+        </ul>
+      </div>
+      <div class="btn-next">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          *ngIf="questionNum === questionsNum - 1; else showNextBtn"
+        >
+          Submit
+        </button>
+        <ng-template #showNextBtn>
+          <button class="btn btn-primary" type="button" (click)="onNext()">
+            Next
+          </button>
+        </ng-template>
+      </div>
+    </form>
+  </div>
+</ng-template>

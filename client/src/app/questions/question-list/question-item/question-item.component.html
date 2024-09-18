@@ -1,0 +1,58 @@
+<div *ngIf="!createExamMode; else examMode">
+  <a
+    class="list-group-item item-group-item-action mb-3"
+    [routerLink]="['../', 'questions', question.id, 'edit']"
+  >
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">
+        Question #{{ index + 1 + (page - 1) * itemsPerPage }}
+      </h5>
+      <small>{{ question.levelId }}</small>
+    </div>
+    <p>{{ question.content }}</p>
+    <small
+      >{{ question.category }} -
+      {{ question.subCategory !== null ? question.subCategory : "N/A" }}
+    </small>
+    <small>[{{ question.typeId }}] - </small>
+    <small>{{ question.mark }} marks - </small>
+    <small>{{ question.expectedTime }} min</small>
+  </a>
+</div>
+
+<ng-template #examMode>
+  <div class="list-group-item item-group-item-action mb-3">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">
+        Question #{{ index + 1 + (page - 1) * itemsPerPage }}
+      </h5>
+      <small>{{ question.levelId }}</small>
+    </div>
+    <div class="mb-2">
+      <p>{{ question.content }}</p>
+      <small
+        >{{ question.category }} -
+        {{ question.subCategory !== null ? question.subCategory : "N/A" }}
+      </small>
+      <small>[{{ question.typeId }}] - </small>
+      <small>{{ question.mark }} marks - </small>
+      <small>{{ question.expectedTime }} min</small>
+    </div>
+    <div>
+      <button
+        class="btn btn-primary me-2"
+        (click)="onAddQuestionToExam(question.id)"
+        [disabled]="isQuestionAddedToExam(question.id) === -1 ? false : true"
+      >
+        Add to Exam
+      </button>
+      <button
+        class="btn btn-danger ms-2"
+        (click)="onRemoveQuestionFromExam(question.id)"
+        [disabled]="isQuestionAddedToExam(question.id) === -1 ? true : false"
+      >
+        Remove From Exam
+      </button>
+    </div>
+  </div>
+</ng-template>

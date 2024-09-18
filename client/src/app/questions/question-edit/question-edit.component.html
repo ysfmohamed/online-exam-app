@@ -1,0 +1,167 @@
+<div class="row">
+  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+    <div class="row justify-content-center">
+      <div class="col-5">
+        <label class="form-label" for="questionContent">Question Content</label>
+        <textarea
+          class="form-control"
+          name="questionContent"
+          id="questionContent"
+          rows="4"
+          formControlName="questionContent"
+        ></textarea>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-5">
+        <label class="form-label" for="questionType">Question Type</label>
+        <select
+          class="form-select"
+          name="questionType"
+          id="questionType"
+          formControlName="questionType"
+        >
+          <option value="MCQ" selected>MCQ</option>
+          <option value="True/False">True/False</option>
+        </select>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-5">
+        <label class="form-label" for="questionLevel">Question Level</label>
+        <select
+          class="form-select"
+          name="questionLevel"
+          id="questionLevel"
+          formControlName="questionLevel"
+        >
+          <option value="Easy" selected>Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+          <option value="Expert">Expert</option>
+        </select>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-5">
+        <label class="form-label" for="questionCategory"
+          >Question Category</label
+        >
+        <input
+          class="form-control"
+          type="text"
+          name="questionCategory"
+          id="questionCategory"
+          placeholder="Enter question category..."
+          formControlName="questionCategory"
+        />
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-5">
+        <label class="form-label" for="questionSubCategory"
+          >Question Sub Category</label
+        >
+        <input
+          class="form-control"
+          type="text"
+          name="questionSubCategory"
+          id="questionSubCategory"
+          placeholder="Enter question sub cateory..."
+          formControlName="questionSubCategory"
+        />
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-5">
+        <label class="form-label" for="questionMark">Question Mark</label>
+        <input
+          class="form-control"
+          type="number"
+          id="questionMark"
+          name="questionMark"
+          placeholder="Enter question mark..."
+          formControlName="questionMark"
+        />
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-5">
+        <label class="form-label" for="questionEt">Expected Time</label>
+        <input
+          class="form-control"
+          type="number"
+          id="questionEt"
+          name="questionEt"
+          placeholder="Enter expected time to solve the question..."
+          formControlName="questionExpectedTime"
+        />
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-5">
+        <label class="form-label" for="">Add Possible Answers</label>
+        <div formArrayName="answers">
+          <div
+            class="d-flex justify-content-between mb-3"
+            *ngFor="let answer of getQuestionAnswers(); let i = index"
+            [formGroupName]="i"
+          >
+            <!-- Add ngFor to add more controls like that -->
+            <div class="d-flex align-items-center">
+              <input
+                class="form-check-input me-3"
+                type="checkbox"
+                name="isCorrectAnswer"
+                formControlName="isCorrectAnswer"
+              />
+              <input
+                class="form-control"
+                type="text"
+                name="answerContent"
+                placeholder="Add answer..."
+                formControlName="answerContent"
+              />
+            </div>
+            <div>
+              <button
+                class="btn btn-danger"
+                type="button"
+                (click)="onDeleteAnswer(i)"
+              >
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button
+          class="btn btn-secondary"
+          type="button"
+          (click)="onAddNewAnswer()"
+        >
+          New Answer
+        </button>
+      </div>
+    </div>
+    <hr />
+    <div class="row justify-content-center mt-5 mb-5">
+      <div class="col-5" *ngIf="!editMode; else edit">
+        <button class="btn btn-primary" type="submit">Add Question</button>
+      </div>
+      <ng-template #edit>
+        <div class="w-50 d-flex justify-content-between">
+          <button class="btn btn-primary" type="button" (click)="onSubmit()">
+            Edit Question
+          </button>
+          <button
+            class="btn btn-danger"
+            type="button"
+            (click)="onDeleteQuestion()"
+          >
+            Delete Question
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </form>
+</div>

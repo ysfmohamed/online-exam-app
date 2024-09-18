@@ -1,0 +1,72 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box">
+  <div
+    class="alert-box-nav d-flex justify-content-between align-items-center mb-4"
+  >
+    <h4 class="text-center">Assign Exam to Student</h4>
+    <a (click)="onClose()">
+      <i class="bi bi-x-lg"></i>
+    </a>
+  </div>
+  <div class="assign-exam-form">
+    <form [formGroup]="assignExamForm" (ngSubmit)="onSubmit()">
+      <div class="row justify-content-center mb-4">
+        <div class="col-5 col-lg-5">
+          <label class="form-label" for="scheduledTimeFrom"
+            >Start Date Boundary</label
+          >
+          <input
+            class="form-control"
+            type="datetime-local"
+            id="scheduledTimeFrom"
+            formControlName="scheduledTimeFrom"
+          />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-4">
+        <div class="col-5 col-lg-5">
+          <label class="form-label" for="scheduledTimeTo"
+            >End Date Boundary</label
+          >
+          <input
+            class="form-control"
+            type="datetime-local"
+            id="scheduledTimeTo"
+            formControlName="scheduledTimeTo"
+          />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-4">
+        <div class="col-5 col-lg-5">
+          <label class="form-label" for="examDuration"
+            >Exam Duration (In minutes)</label
+          >
+          <input
+            class="form-control"
+            type="number"
+            id="examDuration"
+            formControlName="examDuration"
+          />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-4">
+        <div class="col-5 col-lg-5">
+          <label class="form-label" for="takenBy">Student Username</label>
+          <input
+            class="form-control"
+            type="text"
+            id="takenBy"
+            formControlName="studentUsername"
+          />
+        </div>
+      </div>
+      <div class="row justify-content-center mb-4">
+        <div class="col-5 col-lg-5">
+          <button class="btn btn-primary btn-block w-100">
+            Assign Exam to Student
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

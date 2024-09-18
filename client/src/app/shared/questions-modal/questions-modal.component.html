@@ -1,0 +1,12 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box">
+  <div class="alert-box-nav d-flex justify-content-between align-items-center">
+    <h4 class="text-center">Choose Questions</h4>
+    <a (click)="onClose()">
+      <i class="bi bi-x-lg"></i>
+    </a>
+  </div>
+  <div class="questions-list">
+    <app-questions [createExamMode]="true"></app-questions>
+  </div>
+</div>

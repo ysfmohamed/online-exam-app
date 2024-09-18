@@ -1,0 +1,38 @@
+<app-assign-exam-modal
+  [examToBeAssigned]="examDefinition"
+  (close)="onClose()"
+  *ngIf="assignExamMode"
+></app-assign-exam-modal>
+<div class="row">
+  <div class="list-group">
+    <a
+      class="list-group-item item-group-item-action mb-3"
+      style="cursor: pointer"
+      (click)="onAssignExam(exam)"
+      *ngFor="
+        let exam of examDefinitions
+          | paginate
+            : {
+                itemsPerPage: itemsPerPage,
+                currentPage: page,
+                totalItems: totalPages
+              }
+      "
+    >
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ exam.name }}</h5>
+      </div>
+      <p></p>
+      <small>Instructor {{ exam.createdBy }} - </small>
+      <small>{{ exam.passingScore }}% Passing score - </small>
+      <small>{{ exam.questions.length }} Questions</small>
+    </a>
+  </div>
+  <div class="d-flex justify-content-center mt-5 mb-5">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLevel="Next"
+      (pageChange)="onPageChange($event)"
+    ></pagination-controls>
+  </div>
+</div>

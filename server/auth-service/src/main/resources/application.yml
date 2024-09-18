@@ -1,0 +1,55 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/online-exam-auth-service
+    username: postgres
+    password: 1234
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/principal
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+jwt:
+  auth:
+    converter:
+      resource-id: auth-service
+      principal-attribute: preffered-username
+
+# endpoints inside auth controller
+endpoint:
+  auth-controller:
+    signup: signup
+    login: login
+    logout: logout/{userId}
+    userinfo: userinfo
+
+#keycloak information
+keycloak:
+  realm: principal
+  client-id: auth-service
+  client-secret: 0L7WTz8IcUMgENt3U13wW7HEiztRyg22
+  server-url: http://localhost:8080
+  controller-username: admin
+  controller-password: admin
+  grant-type: password
+  token-endpoint: http://localhost:8080/realms/principal/protocol/openid-connect/token
+  userinfo-endpoint: http://localhost:8080/realms/principal/protocol/openid-connect/userinfo
+
+#authorize-endpoint used inside Security Configuration class
+authorize-ep:
+  auth-controller:
+    signup: /auth/signup
+    login: /auth/login
+    logout: /auth/logout/**
+
+roles:
+  teacher-role: teacher
+  student-role: student
+
+server:
+  port: 8082

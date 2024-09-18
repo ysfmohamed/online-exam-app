@@ -1,0 +1,33 @@
+<div *ngIf="questions.length > 0; else noQuestions">
+  <div class="list-group">
+    <app-question-item
+      *ngFor="
+        let question of questions
+          | paginate
+            : {
+                itemsPerPage: itemsPerPage,
+                currentPage: page,
+                totalItems: totalPages
+              };
+        let i = index
+      "
+      [question]="question"
+      [index]="i"
+      [page]="page"
+      [totalItems]="totalPages"
+      [itemsPerPage]="itemsPerPage"
+    ></app-question-item>
+  </div>
+  <div class="d-flex justify-content-center mt-5 mb-5">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLevel="Next"
+      (pageChange)="onPageChange($event)"
+    ></pagination-controls>
+  </div>
+</div>
+<ng-template #noQuestions>
+  <div class="d-flex justify-content-center">
+    <p class="fs-3">No questions available</p>
+  </div>
+</ng-template>

@@ -1,0 +1,17 @@
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar-brand {
+  font-size: 25px;
+}
+
+.bi.bi-person-circle,
+.bi.bi-bell {
+  font-size: 25px;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}

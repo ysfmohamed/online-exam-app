@@ -1,0 +1,44 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 50;
+}
+
+.alert-box {
+  margin-bottom: 50px;
+  overflow-y: scroll;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60vw;
+  height: 85vh;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  z-index: 100;
+}
+
+.alert-box .alert-box-nav {
+  position: sticky;
+  width: 100%;
+  top: 0;
+  z-index: 15;
+  height: 90px;
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  border-bottom: 3px solid #ced0ce;
+}
+
+.alert-box .alert-box-nav a {
+  font-size: 28px;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.alert-box .questions-list {
+  padding: 16px;
+}

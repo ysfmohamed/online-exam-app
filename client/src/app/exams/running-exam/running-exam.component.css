@@ -1,0 +1,23 @@
+.running-exam {
+  height: calc(100vh - 99.2px);
+}
+
+.running-exam button {
+  width: 25%;
+}
+
+.question-content {
+  font-size: 28px;
+}
+
+.question-content span {
+  font-size: 20px;
+}
+
+.answers-list .answer .answer-id {
+  font-weight: 600;
+}
+
+.btn-next button {
+  width: 200px;
+}

@@ -1,0 +1,45 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/online-exam-exam-engine-service
+    username: postgres
+    password: 1234
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/principal
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+endpoint:
+  exam-controller:
+    fetch-exam-definitions: exam-definitions
+    fetch-exam-definitions-amount: exam-definitions-amount
+    fetch-exam-definition: definition/{id}
+    fetch-exam-instance: instance/{id}
+    create-exam: create
+    assign-exam-to-student: assign-exam-to-student/{examId}
+    take-exam: take/{examInstanceId}
+    next: next/{examInstanceId}
+    submit: submit
+
+authorize-ep:
+  exam-controller:
+    fetch-exam-definitions: /exam/exam-definitions
+    fetch-exam-definitions-amount: /exam/exam-definitions-amount
+    fetch-exam-definition: /exam/definition/**
+    fetch-exam-instance: /exam/instance/**
+    create-exam: /exam/create
+    take-exam: /exam/take/**
+    assign-exam-to-student: /exam/assign-exam-to-student/**
+    next: /exam/next/**
+
+roles:
+  teacher-role: teacher
+  student-role: student
+
+server:
+  port: 8083

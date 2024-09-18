@@ -1,0 +1,13 @@
+package com.joe.questionsbankservice;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class QuestionsBankServiceApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
